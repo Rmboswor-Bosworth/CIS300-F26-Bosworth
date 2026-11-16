@@ -1,0 +1,118 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gym&amp;CaloriePal :: Calorie Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <header>
+        <h1><a href="index.html">Gym&amp;CaloriePal</a></h1>
+      </header>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="calculator.html">Calorie Calculator</a></li>
+          <li><a href="resource.html">Resources Directory</a></li>
+          <li><a href="nutrition.html">Nutrition Training</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <main>
+        <h2>Calorie Multiplier Calculator</h2>
+        <p>
+          This calculator uses body-weight calorie multipliers sourced from the
+          <a
+            href="https://www.niddk.nih.gov/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >NIDDK</a
+          >
+          to help estimate daily caloric requirements.
+        </p>
+
+        <div class="card-box">
+          <h3>How It Works &amp; How to Use It</h3>
+          <p>
+            To use the calculator manually, choose your activity target from the
+            sourced multiplier table below and multiply your body weight in
+            pounds by the given range. Alternatively, type your weight into the
+            interactive tool below for instant calculations.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Activity Level</th>
+                <th>Calorie Multiplier Range</th>
+                <th>Daily Calorie Target Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Sedentary / Light Activity</td>
+                <td>11 – 13 calories / lb</td>
+                <td>Fat Loss / Caloric Deficit</td>
+              </tr>
+              <tr>
+                <td>Moderate Activity</td>
+                <td>14 – 15 calories / lb</td>
+                <td>Weight Maintenance</td>
+              </tr>
+              <tr>
+                <td>Heavy / Intense Activity</td>
+                <td>16 – 17 calories / lb</td>
+                <td>Weight Gain / Caloric Surplus</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="calculator-box" class="card-box">
+          <h3>Instant Calorie Calculator</h3>
+          <div class="calc-inputs">
+            <label for="weight">Enter Body Weight (lbs): </label>
+            <input type="number" id="weight" placeholder="e.g., 150" />
+            <button type="button" onclick="calculateCalories()">
+              Calculate Range
+            </button>
+          </div>
+          <div id="calc-result"></div>
+        </div>
+
+        <script>
+          function calculateCalories() {
+            const weight = parseFloat(document.getElementById("weight").value);
+            const result = document.getElementById("calc-result");
+            if (!weight || weight <= 0) {
+              result.innerHTML = "<p>Please enter a valid body weight.</p>";
+              return;
+            }
+            const lossLow = Math.round(weight * 11);
+            const lossHigh = Math.round(weight * 13);
+            const maintLow = Math.round(weight * 14);
+            const maintHigh = Math.round(weight * 15);
+            const gainLow = Math.round(weight * 16);
+            const gainHigh = Math.round(weight * 17);
+
+            result.innerHTML = `
+            <div class="result-card"><strong>Fat Loss Target:</strong> ${lossLow} – ${lossHigh} calories/day</div>
+            <div class="result-card"><strong>Maintenance Target:</strong> ${maintLow} – ${maintHigh} calories/day</div>
+            <div class="result-card"><strong>Weight Gain Target:</strong> ${gainLow} – ${gainHigh} calories/day</div>
+          `;
+          }
+        </script>
+      </main>
+
+      <footer>
+        Copyright &copy; 2026 Gym&amp;CaloriePal<br />
+        <a href="mailto:rmboswor@asu.edu">rmboswor@asu.edu</a>
+      </footer>
+    </div>
+  </body>
+</html>
